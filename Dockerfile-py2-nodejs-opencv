@@ -1,0 +1,65 @@
+FROM ubuntu:16.04
+LABEL maintainer "jacky.huang@isobar.com"
+ENV OPENCV_VERSION 3.4.5
+
+# Install all dependencies for OpenCV
+RUN apt-get -y update && \
+    apt-get -y install \
+        python2.7 \
+        python2.7-dev \
+        build-essential \
+        git \
+        wget \
+        unzip \
+        cmake \
+        pkg-config \
+        libatlas-base-dev \
+        gfortran \
+        libjasper-dev \
+        libavcodec-dev \
+        libavformat-dev \
+        libswscale-dev \
+        libjpeg-dev \
+        libpng-dev \
+        libtiff-dev \
+        libjasper-dev \
+        libv4l-dev \
+        libsm6 \
+        libxrender1 \
+        python-pip \
+    && \
+
+# Install python dependencies
+    pip install --no-cache-dir cmake numpy Pillow scipy 'matplotlib<3.0' scikit-image \
+    && \
+
+# Install nodejs and forever
+    wget -qO- https://deb.nodesource.com/setup_8.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install forever -g \
+    && \
+
+# Install OpenCV
+    pip install --no-cache-dir 'opencv-contrib-python-headless<4.0.0' \
+    && \
+
+# Clean
+    apt-get -y remove \
+        python2.7-dev \
+        libatlas-base-dev \
+        gfortran \
+        libjasper-dev \
+        libavcodec-dev \
+        libavformat-dev \
+        libswscale-dev \
+        libjpeg-dev \
+        libpng-dev \
+        libtiff-dev \
+        libjasper-dev \
+        libv4l-dev \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Define default command.
+CMD ["python", "--version"]

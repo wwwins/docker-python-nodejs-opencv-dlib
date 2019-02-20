@@ -1,0 +1,11 @@
+FROM isobar/docker-python-nodejs-opencv-dlib
+LABEL maintainer "jacky.huang@isobar.com"
+
+WORKDIR /home/listerine-2019/vision-server
+
+# Install my app
+COPY . .
+RUN npm install
+RUN pip install --no-cache-dir packages/IsobarImg-0.3.0.tar.gz
+
+CMD ["npm", "start"]

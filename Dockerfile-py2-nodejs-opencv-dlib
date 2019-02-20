@@ -1,0 +1,14 @@
+FROM isobar/docker-python-nodejs-opencv
+LABEL maintainer "jacky.huang@isobar.com"
+
+# Install dlib
+RUN git clone https://github.com/davisking/dlib.git && \
+    cd dlib/examples && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    cmake --build . --config Release && \
+    cd ../../ && \
+    python setup.py install && \
+    rm -rf /dlib
+
