@@ -4,15 +4,17 @@ ENV OPENCV_VERSION 3.4.5
 
 # Install all dependencies for OpenCV
 RUN apt-get -y update && \
-    apt-get -y install \
+    apt-get -y install --no-install-recommends \
         python2.7 \
         python2.7-dev \
         build-essential \
+        python-setuptools \
         git \
         wget \
         unzip \
         cmake \
         pkg-config \
+        python-pip \
         libatlas-base-dev \
         gfortran \
         libjasper-dev \
@@ -26,7 +28,6 @@ RUN apt-get -y update && \
         libv4l-dev \
         libsm6 \
         libxrender1 \
-        python-pip \
     && \
 
 # Install python dependencies
