@@ -58,6 +58,8 @@ RUN apt-get -y update && \
         libtiff-dev \
         libjasper-dev \
         libv4l-dev \
+        libsm6 \
+        libxrender1 \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
