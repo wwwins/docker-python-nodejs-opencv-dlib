@@ -5,7 +5,7 @@ WORKDIR /home/listerine-2019/vision-server
 
 # Install my app
 COPY . .
-RUN npm install
-RUN pip install --no-cache-dir packages/IsobarImg-0.3.0.tar.gz
+RUN npm install && \
+    pip install --no-deps --no-cache-dir packages/IsobarImg-0.3.0.tar.gz
 
 CMD ["npm", "start"]
